@@ -1,0 +1,77 @@
+app:
+  name: mock-app
+  port: 1000
+  log_level: 1
+
+stock_db:
+  dsn: mockuser:mockpass@tcp(mock-stock-host:3306)/mock_stock?charset=utf8mb4&parseTime=True&loc=Local
+
+analytic_db:
+  dsn: mockuser:mockpass@tcp(mock-analytic-host:3306)/mock_analytic?charset=utf8mb4&parseTime=True&loc=Local
+
+postgres_db:
+  user: mockuser
+  password: mockpassword
+  dbName: mock_data_source
+  unix: ""
+  host: 127.0.0.1
+  port: 5432
+
+page_show:
+  cypto_lite_page: false
+  twitter_page: false
+  sentimemt_page: false
+  stats_page: false
+  sector_page: false
+  overview_market_page: false
+  copy_trade_page: false
+
+timescale_db:
+  host: mock.timescale.host
+  port: "00000"
+  user: mockuser
+  password: mockpassword
+  dbname: mockdb
+  sslmode: "require"
+
+crypto_db:
+  user: mockuser
+  password: mockpassword
+  dbName: mock_crypto
+  unix: "/cloudsql/mock:region:crypto"
+  host: 127.0.0.1
+  port: 5434
+
+telegram:
+  bot_token: "mock-telegram-token"
+  padt_url: "https://example.com/crypto/"
+  run_bot: false  # mock placeholder
+
+firebase:
+  credential: |
+    {
+      "type": "service_account",
+      "project_id": "mock-project",
+      "private_key_id": "mock-private-key-id",
+      "private_key": "-----BEGIN PRIVATE KEY-----\nMOCKPRIVATEKEYDATA\n-----END PRIVATE KEY-----\n",
+      "client_email": "mock-service-account@example.com",
+      "client_id": "1234567890",
+      "auth_uri": "https://accounts.google.com/o/oauth2/auth",
+      "token_uri": "https://oauth2.googleapis.com/token",
+      "auth_provider_x509_cert_url": "https://www.googleapis.com/oauth2/v1/certs",
+      "client_x509_cert_url": "https://www.googleapis.com/robot/v1/metadata/x509/mock-service-account",
+      "universe_domain": "googleapis.com"
+    }
+
+privy:
+  app_id: "mock-app-id"
+  app_secret: "mock-app-secret"
+  base64_pkcs8_private_key: "MOCKBASE64PRIVATEKEY"
+  eth_client: "https://mock-eth-client.local"
+  usdc_smart_contract: "0xMockUsdcContract"
+  max_copytrade_users: 10
+
+crypto_trading_bot:
+  baseURL: "https://mock-crypto-trading-bot.local/api"
+  token: "mock-crypto-token"
+

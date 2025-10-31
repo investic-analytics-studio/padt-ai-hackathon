@@ -1,0 +1,3016 @@
+basePath: /api/v2/
+definitions:
+  handler.AddAuthor:
+    properties:
+      author_name:
+        type: string
+      group_id:
+        type: string
+    type: object
+  handler.AddGroup:
+    properties:
+      group_name:
+        type: string
+    type: object
+  handler.AuthorRequest:
+    properties:
+      author:
+        type: string
+      wallet_id:
+        type: string
+    type: object
+  handler.CheckRefcodeRequest:
+    properties:
+      ref_code:
+        description: UserID  string `json:"user_id" validate:"required"`
+        type: string
+    required:
+    - ref_code
+    type: object
+  handler.CheckRefcodeResponse:
+    properties:
+      result:
+        type: boolean
+    type: object
+  handler.CheckUserIDExistsResponse:
+    properties:
+      result:
+        type: boolean
+    type: object
+  handler.DeleteGroup:
+    properties:
+      group_id:
+        type: string
+    type: object
+  handler.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  handler.GenerateRefcodeRequest:
+    properties:
+      crypto_user_id:
+        type: string
+    required:
+    - crypto_user_id
+    type: object
+  handler.GenerateRefcodeResponse:
+    properties:
+      refcodes:
+        items:
+          type: string
+        type: array
+    type: object
+  handler.GetCryptoRefUserResponse:
+    additionalProperties:
+      type: string
+    type: object
+  handler.GetFeatureResponse:
+    properties:
+      feature_enable:
+        example: true
+        type: boolean
+      feature_name:
+        example: refcode
+        type: string
+    type: object
+  handler.OffsetDaysRequest:
+    properties:
+      offset_days:
+        type: integer
+    required:
+    - offset_days
+    type: object
+  handler.RemoveAuthor:
+    properties:
+      group_auther_id:
+        type: string
+    type: object
+  handler.TelegramUpsert:
+    properties:
+      chat_id:
+        type: string
+      user_id:
+        type: string
+    type: object
+  handler.UnAuthorRequest:
+    properties:
+      author:
+        type: string
+      wallet_id:
+        type: string
+    type: object
+  handler.UpdateCryptoUserApproveRequest:
+    properties:
+      approve:
+        type: boolean
+      uuid:
+        type: string
+    type: object
+  handler.UpdateDisplayCodeRequest:
+    properties:
+      crypto_user_id:
+        type: string
+      display_code:
+        type: string
+    type: object
+  handler.UpdateGroupNameRequest:
+    properties:
+      group_id:
+        type: string
+      new_group_name:
+        type: string
+    type: object
+  handler.cexAuthorRequest:
+    properties:
+      author:
+        type: string
+      wallet_id:
+        type: string
+    type: object
+  handler.cexWalletIDRequest:
+    properties:
+      wallet_id:
+        type: string
+    type: object
+  handler.dexWalletRequest:
+    properties:
+      wallet_id:
+        type: string
+    type: object
+  model.AuthorDetail:
+    properties:
+      WeightNav:
+        items:
+          $ref: '#/definitions/model.Nav'
+        type: array
+      authorName:
+        type: string
+      bearishTokens:
+        items:
+          $ref: '#/definitions/model.SentimentToken'
+        type: array
+      bullishTokens:
+        items:
+          $ref: '#/definitions/model.SentimentToken'
+        type: array
+      drawdown:
+        type: number
+      end:
+        type: integer
+      endNav:
+        type: number
+      limit:
+        type: integer
+      maximumDrawdown:
+        type: number
+      profile:
+        $ref: '#/definitions/model.AuthorProfile'
+      recentTimeline:
+        items:
+          $ref: '#/definitions/model.AuthorTweetWithSignals'
+        type: array
+      roi:
+        type: number
+      start:
+        type: integer
+      startNav:
+        type: number
+      totalTimeline:
+        type: integer
+    type: object
+  model.AuthorNav:
+    properties:
+      WeightNav:
+        items:
+          $ref: '#/definitions/model.Nav'
+        type: array
+      authorName:
+        type: string
+      authorUsername:
+        type: string
+      drawdown:
+        type: number
+      endNav:
+        type: number
+      maximumDrawdown:
+        type: number
+      rank:
+        type: integer
+      roi:
+        type: number
+      startNav:
+        type: number
+    type: object
+  model.AuthorProfile:
+    properties:
+      author_followers:
+        type: integer
+      author_following:
+        type: integer
+      author_name:
+        type: string
+      author_tier:
+        type: string
+      author_twitter_url:
+        type: string
+      author_url:
+        type: string
+      author_username:
+        type: string
+      created_at:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  model.AuthorTweetWithSignals:
+    properties:
+      bookmark_count:
+        type: integer
+      conversation_id:
+        type: string
+      id:
+        description: Tweet data
+        type: string
+      is_pinned:
+        type: boolean
+      is_quote:
+        type: boolean
+      is_reply:
+        type: boolean
+      is_retweet:
+        type: boolean
+      like_count:
+        type: integer
+      media_url:
+        type: string
+      quote_count:
+        type: integer
+      reply_count:
+        type: integer
+      retweet_count:
+        type: integer
+      signal_action:
+        type: string
+      signal_created_at:
+        type: string
+      signal_prompt_version:
+        type: string
+      signal_score:
+        type: integer
+      signal_sentiment:
+        type: string
+      signal_ticker:
+        description: Signal data (optional - may be null if no signal exists)
+        type: string
+      signal_updated_at:
+        type: string
+      source:
+        type: string
+      text:
+        type: string
+      tickers_rule_based:
+        type: string
+      tweet_created_at:
+        type: string
+      tweet_created_date:
+        type: string
+      url:
+        type: string
+      view_count:
+        type: number
+    type: object
+  model.CRMLoginBody:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    required:
+    - password
+    - username
+    type: object
+  model.CexConnectRequest:
+    properties:
+      api_key:
+        description: WalletAddress          string   `json:"wallet_address" example:"copytrade-primary"`
+        example: cex_api_key
+        type: string
+      api_secret:
+        example: cex_api_secret
+        type: string
+      exchange:
+        example: binance-th
+        type: string
+      wallet_name:
+        example: CEX Main
+        type: string
+    type: object
+  model.CexUpdateAPIKeyRequest:
+    properties:
+      api_key:
+        example: cex_api_key
+        type: string
+      api_secret:
+        example: cex_api_secret
+        type: string
+      exchange:
+        example: binance-th
+        type: string
+      wallet_id:
+        example: e50b0c09-18c5-4ff0-a832-54473e1b739e
+        type: string
+    type: object
+  model.CexUpdateHoldingPeriodRequest:
+    properties:
+      holding_period:
+        type: integer
+      wallet_id:
+        type: string
+    type: object
+  model.CexUpdatePositionSizeRequest:
+    properties:
+      position_size_percentage:
+        example: 0.2
+        type: number
+      wallet_id:
+        example: e50b0c09-18c5-4ff0-a832-54473e1b739e
+        type: string
+    type: object
+  model.CexUpdateSLRequest:
+    properties:
+      exchange:
+        example: binance-th
+        type: string
+      sl_percentage:
+        example: 25
+        type: number
+      wallet_id:
+        example: e50b0c09-18c5-4ff0-a832-54473e1b739e
+        type: string
+    type: object
+  model.CexWalletInfo:
+    properties:
+      authors:
+        items:
+          $ref: '#/definitions/model.SubscribeAuthor'
+        type: array
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      holding_hour_period:
+        type: integer
+      hyperliquid_basecode:
+        type: boolean
+      leverage:
+        type: integer
+      position_size_percentage:
+        type: number
+      priority:
+        type: integer
+      privy_wallet_id:
+        type: string
+      sl_percentage:
+        type: number
+      tp_percentage:
+        type: number
+      updated_at:
+        type: string
+      wallet_id:
+        type: string
+      wallet_name:
+        type: string
+      wallet_type:
+        type: string
+    type: object
+  model.CexWalletTotalValue:
+    properties:
+      total_value:
+        type: number
+    type: object
+  model.CheckXUser:
+    properties:
+      isUserExit:
+        type: boolean
+      isUserTelegramExit:
+        type: boolean
+    type: object
+  model.DexConnectRequest:
+    properties:
+      api_key:
+        example: 33rADOAxPstLKpzcJmDPgASDLjs
+        type: string
+      exchange:
+        example: dydx
+        type: string
+      private_key:
+        example: 0xa5e9ed193e183f0bdd72712a89df949e8a8de3b815caa570c44de8697a93b6fs
+        type: string
+      trading_account_id:
+        example: "516866395334867"
+        type: string
+      wallet_address:
+        example: 0xa5e9ed193e183f0bdd72712a89df949e8a8de3b
+        type: string
+      wallet_name:
+        example: DEX Main
+        type: string
+    type: object
+  model.DexUpdateAPICredentialsRequest:
+    properties:
+      api_key:
+        example: dex_api_key
+        type: string
+      exchange:
+        example: dydx
+        type: string
+      private_key:
+        example: 0xa5e9ed193e183f0bdd72712a89df949e8a8de3b815caa570c44de8697a93b6fs
+        type: string
+      trading_account:
+        example: "516866395334867"
+        type: string
+      wallet_id:
+        example: e50b0c09-18c5-4ff0-a832-54473e1b739e
+        type: string
+    type: object
+  model.DexUpdateHoldingPeriodRequest:
+    properties:
+      holding_period:
+        example: 48
+        type: integer
+      wallet_id:
+        example: e50b0c09-18c5-4ff0-a832-54473e1b739e
+        type: string
+    type: object
+  model.DexUpdateLeverageRequest:
+    properties:
+      exchange:
+        example: dydx
+        type: string
+      leverage:
+        example: 3
+        type: integer
+      wallet_id:
+        example: e50b0c09-18c5-4ff0-a832-54473e1b739e
+        type: string
+    type: object
+  model.DexUpdatePositionSizeRequest:
+    properties:
+      position_size_percentage:
+        example: 0.2
+        type: number
+      wallet_id:
+        example: e50b0c09-18c5-4ff0-a832-54473e1b739e
+        type: string
+    type: object
+  model.DexUpdateSLRequest:
+    properties:
+      exchange:
+        example: dydx
+        type: string
+      sl_percentage:
+        example: 25
+        type: number
+      wallet_id:
+        example: e50b0c09-18c5-4ff0-a832-54473e1b739e
+        type: string
+    type: object
+  model.DexWalletTotalValue:
+    properties:
+      total_value:
+        type: number
+    type: object
+  model.EmailReq:
+    properties:
+      email:
+        type: string
+    required:
+    - email
+    type: object
+  model.KOLUser:
+    properties:
+      displayCode:
+        type: string
+      id:
+        type: string
+    type: object
+  model.LoginBody:
+    properties:
+      login_type:
+        type: string
+      uid:
+        type: string
+    required:
+    - login_type
+    - uid
+    type: object
+  model.Nav:
+    properties:
+      datetime:
+        type: string
+      nav:
+        type: number
+    type: object
+  model.RefferalScoreRanking:
+    properties:
+      cryptoUserEmail:
+        type: string
+      cryptoUserTwitter:
+        type: string
+      date:
+        type: string
+      rank:
+        type: integer
+      rankChange:
+        type: integer
+      totalPoint:
+        description: CryptoUserID string    `db:"crypto_user_id"`
+        type: integer
+    type: object
+  model.SentimentToken:
+    properties:
+      count:
+        type: integer
+      sentiment:
+        type: string
+      ticker:
+        type: string
+    type: object
+  model.SubscribeAuthor:
+    properties:
+      author_username:
+        type: string
+      id:
+        type: string
+    type: object
+  model.WalletInfo:
+    properties:
+      authors:
+        items:
+          $ref: '#/definitions/model.SubscribeAuthor'
+        type: array
+      balance:
+        type: number
+      created_at:
+        type: string
+      deleted_at:
+        type: string
+      holding_hour_period:
+        type: integer
+      hyperliquid_basecode:
+        type: boolean
+      leverage:
+        type: integer
+      position_size_percentage:
+        type: number
+      priority:
+        type: integer
+      privy_wallet_id:
+        type: string
+      sl_percentage:
+        type: number
+      tp_percentage:
+        type: number
+      updated_at:
+        type: string
+      wallet_address:
+        type: string
+      wallet_id:
+        type: string
+      wallet_name:
+        type: string
+      wallet_type:
+        type: string
+    type: object
+  model.XUser:
+    properties:
+      twitter_name:
+        example: NoMoonNoBuy
+        type: string
+    required:
+    - twitter_name
+    type: object
+info:
+  contact:
+    email: admintool@investicstudio.com
+    name: API Support
+  description: API documentation for Crypto Studio Backend
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: Crypto Studio Backend API
+  version: "1.0"
+paths:
+  /auth/exist-email:
+    post:
+      consumes:
+      - application/json
+      description: Verifies if a given email is already registered
+      parameters:
+      - description: Email request
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.EmailReq'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Check if email exists
+      tags:
+      - auth
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticates user and returns JWT token
+      parameters:
+      - description: Login credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.LoginBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: User login
+      tags:
+      - auth
+  /cex/active-wallet:
+    post:
+      consumes:
+      - application/json
+      description: Activate the selected CEX wallet for the current user
+      parameters:
+      - description: CEX wallet id
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/handler.cexWalletIDRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Activate CEX wallet
+      tags:
+      - copytrade/cex
+  /cex/add-wallet:
+    post:
+      consumes:
+      - application/json
+      description: Link a CEX account to the current authenticated user
+      parameters:
+      - description: CEX connect payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.CexConnectRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Connect CEX wallet
+      tags:
+      - copytrade/cex
+  /cex/deactive-wallet:
+    post:
+      consumes:
+      - application/json
+      description: Deactivate the selected CEX wallet for the current user
+      parameters:
+      - description: CEX wallet id
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/handler.cexWalletIDRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Deactivate CEX wallet
+      tags:
+      - copytrade/cex
+  /cex/subscribe-author:
+    post:
+      consumes:
+      - application/json
+      description: Subscribe an author to a CEX wallet
+      parameters:
+      - description: Subscribe author payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/handler.cexAuthorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Subscribe author
+      tags:
+      - copytrade/cex
+  /cex/unsubscribe-author:
+    post:
+      consumes:
+      - application/json
+      description: Unsubscribe an author from a CEX wallet
+      parameters:
+      - description: Unsubscribe author payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/handler.cexAuthorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Unsubscribe author
+      tags:
+      - copytrade/cex
+  /cex/update-api-key:
+    post:
+      consumes:
+      - application/json
+      description: Update the API key and secret of a CEX wallet
+      parameters:
+      - description: API credential payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.CexUpdateAPIKeyRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update API credentials
+      tags:
+      - copytrade/cex
+  /cex/update-holding-period:
+    post:
+      consumes:
+      - application/json
+      description: Update the holding period (in hours) configured for a CEX wallet
+      parameters:
+      - description: Holding period payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.CexUpdateHoldingPeriodRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update holding period
+      tags:
+      - copytrade/cex
+  /cex/update-position-size:
+    post:
+      consumes:
+      - application/json
+      description: Update the position size percentage of a CEX wallet
+      parameters:
+      - description: Position size payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.CexUpdatePositionSizeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update position size percentage
+      tags:
+      - copytrade/cex
+  /cex/update-sl:
+    post:
+      consumes:
+      - application/json
+      description: Update the stop loss percentage of a CEX wallet
+      parameters:
+      - description: Stop loss payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.CexUpdateSLRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update stop loss
+      tags:
+      - copytrade/cex
+  /cex/wallet-info:
+    get:
+      description: Retrieve CEX wallets for the current authenticated user filtered
+        by exchange
+      parameters:
+      - description: Exchange identifier (e.g. bybit)
+        in: query
+        name: exchange
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.CexWalletInfo'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List CEX wallets
+      tags:
+      - copytrade/cex
+  /cex/wallet-total-value:
+    get:
+      description: Retrieve the total value of a CEX wallet for the current authenticated
+        user
+      parameters:
+      - description: CEX wallet ID
+        in: query
+        name: wallet_id
+        required: true
+        type: string
+      - description: Exchange identifier (e.g. binance-th)
+        in: query
+        name: exchange
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.CexWalletTotalValue'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get wallet total value
+      tags:
+      - copytrade/cex
+  /check-refcode:
+    post:
+      consumes:
+      - application/json
+      description: Checks if a referral code is valid and not yet used, then updates
+        it with the user's UUID if available
+      parameters:
+      - description: Referral code request with code and user ID
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.CheckRefcodeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CheckRefcodeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Check and update a referral code
+      tags:
+      - refcode
+  /check-user-id:
+    get:
+      consumes:
+      - application/json
+      description: Verifies if the given User ID is already registered in the system
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.CheckUserIDExistsResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Check if User ID exists
+      tags:
+      - refcode
+  /check-xuser:
+    post:
+      consumes:
+      - application/json
+      description: Check X user and telegram alert are exit
+      parameters:
+      - description: XUser
+        in: body
+        name: xUser
+        required: true
+        schema:
+          $ref: '#/definitions/model.XUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.CheckXUser'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Check X user is exit
+      tags:
+      - refcode
+  /crm/get-crypto-user:
+    get:
+      consumes:
+      - application/json
+      description: Get crypto user data
+      parameters:
+      - default: 1
+        description: Page number (starting from 1)
+        in: query
+        name: page
+        type: integer
+      - default: desc
+        description: Sort by waiting_list_timestamp (asc or desc)
+        enum:
+        - asc
+        - desc
+        in: query
+        name: order
+        type: string
+      - description: Search by twitter_name or email
+        in: query
+        name: search
+        type: string
+      - description: Filter by copytrade approval (true/false)
+        in: query
+        name: is_copytrade_approved
+        type: boolean
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get crypto user data
+      tags:
+      - CRM
+  /crm/get_refferal_score:
+    get:
+      consumes:
+      - application/json
+      description: Get refferal score
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get refferal score
+      tags:
+      - CRM
+  /crm/get_user_referral:
+    get:
+      consumes:
+      - application/json
+      description: Get User Referral
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get User Referral
+      tags:
+      - CRM
+  /crm/get_users:
+    get:
+      consumes:
+      - application/json
+      description: Returns all users with uuid, email, and twitter_uid
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get all users
+      tags:
+      - CRM
+  /crm/kol_refer_detail:
+    get:
+      consumes:
+      - application/json
+      description: Fetches KOL referral details with pagination
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get KOL referral details
+      tags:
+      - CRM
+  /crm/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticates CRM user and returns JWT token
+      parameters:
+      - description: Login credentials
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.CRMLoginBody'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'Successful login, returns JWT token. Example: {\"token\":
+            \"<jwt>\"}'
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "400":
+          description: Bad Request - Invalid request body
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "401":
+          description: Unauthorized - Invalid credentials
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      summary: CRM User login
+      tags:
+      - CRM
+  /crm/new-kol:
+    post:
+      consumes:
+      - application/json
+      description: Creates a new KOL user and associates a KOL code. Requires valid
+        CRM user and unique display code.
+      parameters:
+      - description: KOL User Payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/model.KOLUser'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: 'KOL user created successfully", e.g., {\"kolUserID\": \"abc123\"}'
+        "400":
+          description: Bad Request - Invalid input, validation failed, or duplicate
+            KOL user
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "404":
+          description: Not Found - CRM user does not exist
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+        "500":
+          description: Internal Server Error - Validation or DB operation failed
+          schema:
+            $ref: '#/definitions/handler.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create a new KOL user
+      tags:
+      - CRM
+  /crm/privy-user-overview:
+    get:
+      consumes:
+      - application/json
+      description: Returns user profile, wallets (with subscriptions), and trade logs.
+        Filter logs by status and order by execution date.
+      parameters:
+      - description: User ID (crypto_user.id)
+        in: query
+        name: user_id
+        required: true
+        type: string
+      - description: Filter trade_logs.status (e.g. success, fail)
+        in: query
+        name: status
+        type: string
+      - default: desc
+        description: Order by executed_at (asc or desc)
+        enum:
+        - asc
+        - desc
+        in: query
+        name: order
+        type: string
+      - default: 200
+        description: Max logs to return
+        in: query
+        name: limit
+        type: integer
+      - default: 0
+        description: Logs offset for pagination
+        in: query
+        name: offset
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Search privy copytrade user overview by user id
+      tags:
+      - CRM
+  /crm/update-crypto-user-approve:
+    post:
+      consumes:
+      - application/json
+      description: Update a user's copytrade approval (waiting list) status
+      parameters:
+      - description: Approve payload
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateCryptoUserApproveRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: boolean
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update copytrade approval status
+      tags:
+      - CRM
+  /crm/update_display_code:
+    post:
+      consumes:
+      - application/json
+      description: Updates the display_code for a user if not duplicated
+      parameters:
+      - description: Update display_code
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateDisplayCodeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties: true
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update display_code for a user
+      tags:
+      - CRM
+  /dex/active-wallet:
+    post:
+      consumes:
+      - application/json
+      description: Set the selected DEX wallet as active for the current user
+      parameters:
+      - description: DEX wallet activation payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/handler.dexWalletRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Activate DEX wallet
+      tags:
+      - copytrade/dex
+  /dex/add-wallet:
+    post:
+      consumes:
+      - application/json
+      description: Link a DEX account to the current authenticated user
+      parameters:
+      - description: DEX connect payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.DexConnectRequest'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Created
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "409":
+          description: Conflict
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Connect DEX wallet
+      tags:
+      - copytrade/dex
+  /dex/deactive-wallet:
+    post:
+      consumes:
+      - application/json
+      description: Mark the selected DEX wallet as inactive for the current user
+      parameters:
+      - description: DEX wallet deactivation payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/handler.dexWalletRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Deactivate DEX wallet
+      tags:
+      - copytrade/dex
+  /dex/subscribe-author:
+    post:
+      consumes:
+      - application/json
+      description: Subscribe the specified author for copy-trading on a DEX wallet
+      parameters:
+      - description: Author payload
+        in: body
+        name: author
+        required: true
+        schema:
+          $ref: '#/definitions/handler.AuthorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Subscribe author
+      tags:
+      - copytrade/dex
+  /dex/unsubscribe-author:
+    post:
+      consumes:
+      - application/json
+      description: Remove the author subscription from a DEX wallet
+      parameters:
+      - description: Author payload
+        in: body
+        name: author
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UnAuthorRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Unsubscribe author
+      tags:
+      - copytrade/dex
+  /dex/update-api-credentials:
+    post:
+      consumes:
+      - application/json
+      description: Update the API key, private key, and trading account of a DEX wallet
+      parameters:
+      - description: DEX API credential payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.DexUpdateAPICredentialsRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update DEX API credentials
+      tags:
+      - copytrade/dex
+  /dex/update-holding-period:
+    post:
+      consumes:
+      - application/json
+      description: Update the holding period (in hours) configured for a DEX wallet
+      parameters:
+      - description: Holding period payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.DexUpdateHoldingPeriodRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update holding period
+      tags:
+      - copytrade/dex
+  /dex/update-leverage:
+    post:
+      consumes:
+      - application/json
+      description: Update the leverage of a DEX wallet
+      parameters:
+      - description: Leverage payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.DexUpdateLeverageRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update leverage
+      tags:
+      - copytrade/dex
+  /dex/update-position-size:
+    post:
+      consumes:
+      - application/json
+      description: Update the position size percentage of a DEX wallet
+      parameters:
+      - description: Position size payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.DexUpdatePositionSizeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update position size
+      tags:
+      - copytrade/dex
+  /dex/update-sl:
+    post:
+      consumes:
+      - application/json
+      description: Update the stop loss percentage of a DEX wallet
+      parameters:
+      - description: Stop loss payload
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/model.DexUpdateSLRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update stop loss
+      tags:
+      - copytrade/dex
+  /dex/wallet-info:
+    get:
+      description: Retrieve DEX wallets for the current authenticated user filtered
+        by exchange
+      parameters:
+      - description: Exchange identifier (e.g. dydx)
+        in: query
+        name: exchange
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.WalletInfo'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: List DEX wallets
+      tags:
+      - copytrade/dex
+  /dex/wallet-total-value:
+    get:
+      description: Retrieve the total value of a DEX wallet for the current authenticated
+        user
+      parameters:
+      - description: DEX wallet ID
+        in: query
+        name: wallet_id
+        required: true
+        type: string
+      - description: Exchange identifier (e.g. dydx)
+        in: query
+        name: exchange
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.DexWalletTotalValue'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "401":
+          description: Unauthorized
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get wallet total value
+      tags:
+      - copytrade/dex
+  /features/{featureName}:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the status of a feature by its name
+      parameters:
+      - default: refcode
+        description: Feature Name
+        in: path
+        name: featureName
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetFeatureResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get feature by name
+      tags:
+      - features
+  /generate-refcode:
+    post:
+      consumes:
+      - application/json
+      description: Generates and saves a referral code for the provided Crypto User
+        ID
+      parameters:
+      - description: Crypto User ID to generate refcode
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.GenerateRefcodeRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GenerateRefcodeResponse'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Generate a new referral code
+      tags:
+      - refcode
+  /generate-refcode-bynum:
+    post:
+      consumes:
+      - application/json
+      description: Generates a specific number of referral codes for a given user
+        ID
+      parameters:
+      - description: User ID
+        in: query
+        name: uid
+        required: true
+        type: string
+      - description: Number of referral codes to generate
+        in: query
+        name: genNum
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: refcodes
+          schema:
+            additionalProperties:
+              items:
+                type: string
+              type: array
+            type: object
+        "400":
+          description: error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Generate referral codes by number
+      tags:
+      - refcode
+  /get-crypto-ref-user:
+    get:
+      consumes:
+      - application/json
+      description: Fetches refcodes and their corresponding user's email who used
+        the refcode
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetCryptoRefUserResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get Crypto Referral User details
+      tags:
+      - refcode
+  /get-kolcode:
+    get:
+      consumes:
+      - application/json
+      description: Fetches KOL code and number of uses."
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetCryptoRefUserResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get KOL code and number of uses.
+      tags:
+      - refcode
+  /get-refferal-score:
+    get:
+      consumes:
+      - application/json
+      description: Get users refferal score."
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/handler.GetCryptoRefUserResponse'
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get users refferal score.
+      tags:
+      - refcode
+  /get-refferal-score-ranking:
+    post:
+      consumes:
+      - application/json
+      description: Returns referral score rankings with rank changes compared to N
+        days ago.
+      parameters:
+      - description: Number of days to look back for rank comparison
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.OffsetDaysRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successfully retrieved ranking data
+          schema:
+            items:
+              $ref: '#/definitions/model.RefferalScoreRanking'
+            type: array
+        "400":
+          description: Invalid request parameters
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Server-side error occurred
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get referral score rankings with rank changes
+      tags:
+      - refcode
+  /market-overview/sentiment-market-overview:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves the market data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get merket overview data
+      tags:
+      - market-overview
+  /notification/add-author:
+    post:
+      consumes:
+      - application/json
+      description: add new author to group
+      parameters:
+      - description: Add New Author
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.AddAuthor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: add new author to group godoc
+      tags:
+      - Notification
+  /notification/add-group:
+    post:
+      consumes:
+      - application/json
+      description: Add new group
+      parameters:
+      - description: Add New Group
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.AddGroup'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Add new group godoc
+      tags:
+      - Notification
+  /notification/count-group:
+    get:
+      consumes:
+      - application/json
+      description: Count user's group
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Count user's group godoc
+      tags:
+      - Notification
+  /notification/delete-group-author:
+    post:
+      consumes:
+      - application/json
+      description: Delete all author in group
+      parameters:
+      - description: Delete all author in group
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.DeleteGroup'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete all author in group godoc
+      tags:
+      - Notification
+  /notification/disconnect:
+    get:
+      consumes:
+      - application/json
+      description: Delete telegram data, group id and author
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Delete telegram data, group id and author godoc
+      tags:
+      - Notification
+  /notification/get-group:
+    get:
+      consumes:
+      - application/json
+      description: Get Notification group list by uid
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get Notification group list by uid
+      tags:
+      - Notification
+  /notification/get-telegram:
+    get:
+      consumes:
+      - application/json
+      description: Get user telegram data
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get user telegram data godoc
+      tags:
+      - Notification
+  /notification/remove-author:
+    post:
+      consumes:
+      - application/json
+      description: remove author from group
+      parameters:
+      - description: Remove Author
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.RemoveAuthor'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: remove author from group godoc
+      tags:
+      - Notification
+  /notification/update-group-name:
+    post:
+      consumes:
+      - application/json
+      description: Update group name by group id
+      parameters:
+      - description: Update Group Name
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.UpdateGroupNameRequest'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update group name by group id
+      tags:
+      - Notification
+  /notification/update-telegram:
+    post:
+      consumes:
+      - application/json
+      description: Update user telegram data if telegram user id and chat id are valid
+      parameters:
+      - description: Update Telegram Data
+        in: body
+        name: body
+        required: true
+        schema:
+          $ref: '#/definitions/handler.TelegramUpsert'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              additionalProperties: true
+              type: object
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Update user telegram data godoc
+      tags:
+      - Notification
+  /performance/get-author-detail:
+    get:
+      consumes:
+      - application/json
+      description: Get author detail with merged timeline of tweets and signals, including
+        pagination metadata and sentiment analysis data (bearishTokens and bullishTokens)
+        categorized by the specified period
+      parameters:
+      - description: Author Username
+        example: '"0xkyle__"'
+        in: query
+        name: author_username
+        required: true
+        type: string
+      - description: Period
+        enum:
+        - 7D
+        - 1M
+        - ALL
+        example: '"7D"'
+        in: query
+        name: period
+        required: true
+        type: string
+      - default: 0
+        description: Start offset for pagination
+        in: query
+        name: start
+        type: integer
+      - default: 20
+        description: Limit for pagination (max 100)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.AuthorDetail'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get author performance details with merged timeline and sentiment analysis
+      tags:
+      - Performance
+  /performance/get-author-multiholding-detail:
+    get:
+      consumes:
+      - application/json
+      description: Get author detail with merged timeline of tweets and signals, including
+        pagination metadata and sentiment analysis data (bearishTokens and bullishTokens)
+        categorized by the specified period, using multiholding portfolio NAV data
+        based on the holding period
+      parameters:
+      - description: Author Username
+        example: '"0xkyle__"'
+        in: query
+        name: author_username
+        required: true
+        type: string
+      - description: Period
+        enum:
+        - 7D
+        - 1M
+        - ALL
+        example: '"7D"'
+        in: query
+        name: period
+        required: true
+        type: string
+      - description: Holding Period (Hours)
+        enum:
+        - "24"
+        - "48"
+        - "72"
+        - "96"
+        - "120"
+        - "144"
+        - "168"
+        example: '"24"'
+        in: query
+        name: holding_period
+        required: true
+        type: string
+      - default: 0
+        description: Start offset for pagination
+        in: query
+        name: start
+        type: integer
+      - default: 20
+        description: Limit for pagination (max 100)
+        in: query
+        name: limit
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/model.AuthorDetail'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get author performance details with multiholding portfolio NAV data
+      tags:
+      - Performance
+  /performance/get-author-nav:
+    get:
+      consumes:
+      - application/json
+      description: Get author performance navigation data for all authors in specified
+        period
+      parameters:
+      - description: Period
+        enum:
+        - 7D
+        - 1M
+        - ALL
+        example: '"7D"'
+        in: query
+        name: period
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.AuthorNav'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get author navigation performance data
+      tags:
+      - Performance
+  /performance/get-multiholding-port-nav:
+    get:
+      consumes:
+      - application/json
+      description: Get multiholding portfolio NAV performance data with different
+        holding period
+      parameters:
+      - default: 7D
+        description: NAV Period
+        enum:
+        - 7D
+        - 1M
+        - ALL
+        example: '"7D"'
+        in: query
+        name: period
+        type: string
+      - default: "24"
+        description: Holding Period (Hours)
+        enum:
+        - "24"
+        - "48"
+        - "72"
+        - "96"
+        - "120"
+        - "144"
+        - "168"
+        example: '"24"'
+        in: query
+        name: holding_period
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/model.AuthorNav'
+            type: array
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal Server Error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      security:
+      - BearerAuth: []
+      summary: Get multiholding portfolio NAV performance data with different holding
+        period
+      tags:
+      - Performance
+securityDefinitions:
+  BearerAuth:
+    description: Type "Bearer {your-token}" to authenticate
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

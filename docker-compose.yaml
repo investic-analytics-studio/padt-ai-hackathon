@@ -1,0 +1,56 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      - STOCK_DB_DSN=mockuser:mockpassword@tcp(mysql:3306)/mock_stock?charset=utf8mb4&parseTime=True&loc=Local
+      - ANALYTIC_DB_DSN=mockuser:mockpassword@tcp(mysql:3306)/mock_analytic?charset=utf8mb4&parseTime=True&loc=Local
+    depends_on:
+      - mysql
+      - postgres
+      - timescaledb
+
+  mysql:
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: mock-root-password
+      MYSQL_USER: mockuser
+      MYSQL_PASSWORD: mockpassword
+      MYSQL_DATABASE: mock_stock
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./init-mysql:/docker-entrypoint-initdb.d # For initial SQL scripts
+
+  postgres:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: mock_user
+      POSTGRES_PASSWORD: mock_password
+      POSTGRES_DB: mock_data_source
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  timescaledb:
+    image: timescale/timescaledb:latest-pg15
+    environment:
+      POSTGRES_USER: mock_tsdb_user
+      POSTGRES_PASSWORD: mock_tsdb_password
+      POSTGRES_DB: mock_tsdb
+    ports:
+      - "37955:5432"
+    volumes:
+      - timescale_data:/var/lib/postgresql/data
+
+volumes:
+  mysql_data:
+  postgres_data:
+  timescale_data:
